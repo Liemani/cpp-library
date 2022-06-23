@@ -1,43 +1,60 @@
 #include <iostream>
 #include "JSONDescriber.hpp"
+#include "String.hpp"
+#include "Char.hpp"
+
+namespace LMI {
 
 using std::endl;
 
-inline static void printIndent(std::ostream& out, int indentDepth);
+#define OPEN_BRACKETS   "[{"
+#define CLOSE_BRACKETS  "]}"
+#define COMMAS          ","
 
-void JSONDescriber::describe(std::ostream& out, std::string string) {
+String<const char> openBrackets = OPEN_BRACKETS;
+String<const char> closeBrackets = CLOSE_BRACKETS;
+String<const char> commas = COMMAS;
+String<const char> newLineFollowChars = OPEN_BRACKETS COMMAS;
+
+inline static void printIndent(std::ostream& out, int indentDepth, const char* tab);
+
+void JSONDescriber::describe(std::ostream& out, const char* string, const char* tab) {
     int indentDepth = 0;
-    char previousNonSpaceChar;
+    Char<const char> previousNonSpaceChar;
 
-    const char* currentPosition = &string[0];
-    while (*currentPosition != '\0') {   // suppose string always ends with '\0'
-        const char currentChar = *currentPosition;
+    while (true) {
+        const char currentChar = *string;
+
+        if (currentChar == '\0')
+            break;
+
         switch (currentChar) {
             case '{':
             case '[':
-                out << currentChar << endl;
+                if (previousNonSpaceChar.included(newLineFollowChars)) {
+                    out << endl;
+                    printIndent(out, indentDepth, tab);
+                }
+                out << currentChar;
                 ++indentDepth;
-                printIndent(out, indentDepth);
                 previousNonSpaceChar = currentChar;
                 break;
             case '}':
             case ']':
-                if (!(previousNonSpaceChar == ','
-                        || previousNonSpaceChar == '{'
-                        || previousNonSpaceChar == '['))
-                    out << endl;
                 --indentDepth;
-                printIndent(out, indentDepth);
+                if (!previousNonSpaceChar.included(openBrackets)) {
+                    out << endl;
+                    printIndent(out, indentDepth, tab);
+                }
                 out << currentChar;
                 previousNonSpaceChar = currentChar;
                 break;
             case ':':
-                out << ": ";
+                out << " : ";
                 previousNonSpaceChar = currentChar;
                 break;
             case ',':
-                out << ',' << endl;
-                printIndent(out, indentDepth);
+                out << ',';
                 previousNonSpaceChar = currentChar;
                 break;
             case '\t':
@@ -45,15 +62,22 @@ void JSONDescriber::describe(std::ostream& out, std::string string) {
             case ' ':
                 break;
             default:
+                if (previousNonSpaceChar.included(newLineFollowChars)) {
+                    out << endl;
+                    printIndent(out, indentDepth, tab);
+                }
                 out << currentChar;
                 previousNonSpaceChar = currentChar;
                 break;
         }
-        ++currentPosition;
+
+        ++string;
     }
 }
 
-inline static void printIndent(std::ostream& out, int indentDepth) {
+inline static void printIndent(std::ostream& out, int indentDepth, const char* tab) {
     for (int i = 0; i < indentDepth; ++i)
-        out << "    ";
+        out << tab;
 }
+
+}   // namespace LMI
