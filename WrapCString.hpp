@@ -1,16 +1,18 @@
-#ifndef STRING_HPP
-#define STRING_HPP
+#ifndef WRAPCSTRING_HPP
+#define WRAPCSTRING_HPP
+
+#include <string>
 
 namespace LMI {
 
 template <typename CharType>
-class String {
+class WrapCString {
 private:
     CharType* string;
 
 public:
-    String(void) {};
-    String(CharType* string) { this->string = string; };
+    WrapCString(void) {};
+    WrapCString(CharType* string) { this->string = string; };
 
     operator CharType*(void) { return this->string; };
     CharType& operator*(void) { return *this->string; };
@@ -18,11 +20,13 @@ public:
     CharType* operator++(void) { return ++this->string; };
     CharType* operator++(int) { return this->string++; };
 
-    bool contains(CharType ch);
-};  // class String
+    bool contains(char ch) const;
 
-#include "String.tpp"
+    void debugDescription(std::ostream& out) const;
+};  // class WrapCString
+
+#include "WrapCString.ipp"
 
 }   // namespace LMI
 
-#endif  // STRING_HPP
+#endif  // WRAPCSTRING_HPP

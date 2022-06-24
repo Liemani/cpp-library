@@ -1,29 +1,30 @@
 #include <iostream>
 #include "JSONDescriber.hpp"
-#include "String.hpp"
-#include "Char.hpp"
+#include "WrapChar.hpp"
 
 namespace LMI {
 
 using std::endl;
+using std::string;
 
 #define OPEN_BRACKETS   "[{"
 #define CLOSE_BRACKETS  "]}"
 #define COMMAS          ","
 
-String<const char> openBrackets = OPEN_BRACKETS;
-String<const char> closeBrackets = CLOSE_BRACKETS;
-String<const char> commas = COMMAS;
-String<const char> newLineFollowChars = OPEN_BRACKETS COMMAS;
+const char* openBrackets = OPEN_BRACKETS;
+const char* closeBrackets = CLOSE_BRACKETS;
+const char* commas = COMMAS;
+const char* newLineFollowChars = OPEN_BRACKETS COMMAS;
 
 inline static void printIndent(std::ostream& out, int indentDepth, const char* tab);
 
-void JSONDescriber::describe(std::ostream& out, const char* string, const char* tab) {
+void JSONDescriber::describe(std::ostream& out, const string& string, const char* tab) {
     int indentDepth = 0;
-    Char<const char> previousNonSpaceChar;
+    WrapChar<const char> previousNonSpaceChar;
 
+    const char* currentCharPointer = string.c_str();
     while (true) {
-        const char currentChar = *string;
+        const char currentChar = *currentCharPointer;
 
         if (currentChar == '\0')
             break;
@@ -71,7 +72,7 @@ void JSONDescriber::describe(std::ostream& out, const char* string, const char* 
                 break;
         }
 
-        ++string;
+        ++currentCharPointer;
     }
 }
 
