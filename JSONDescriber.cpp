@@ -1,6 +1,6 @@
 #include <iostream>
 #include "JSONDescriber.hpp"
-#include "WrapChar.hpp"
+#include "cpp-library.hpp"
 
 namespace LMI {
 
@@ -20,7 +20,7 @@ inline static void printIndent(std::ostream& out, int indentDepth, const char* t
 
 void JSONDescriber::describe(std::ostream& out, const string& string, const char* tab) {
     int indentDepth = 0;
-    WrapChar<const char> previousNonSpaceChar;
+    char previousNonSpaceChar = '\0';
 
     const char* currentCharPointer = string.c_str();
     while (true) {
@@ -32,7 +32,7 @@ void JSONDescriber::describe(std::ostream& out, const string& string, const char
         switch (currentChar) {
             case '{':
             case '[':
-                if (previousNonSpaceChar.included(newLineFollowChars)) {
+                if (included(previousNonSpaceChar, newLineFollowChars)) {
                     out << endl;
                     printIndent(out, indentDepth, tab);
                 }
@@ -43,7 +43,7 @@ void JSONDescriber::describe(std::ostream& out, const string& string, const char
             case '}':
             case ']':
                 --indentDepth;
-                if (!previousNonSpaceChar.included(openBrackets)) {
+                if (!included(previousNonSpaceChar, openBrackets)) {
                     out << endl;
                     printIndent(out, indentDepth, tab);
                 }
@@ -63,7 +63,7 @@ void JSONDescriber::describe(std::ostream& out, const string& string, const char
             case ' ':
                 break;
             default:
-                if (previousNonSpaceChar.included(newLineFollowChars)) {
+                if (included(previousNonSpaceChar, newLineFollowChars)) {
                     out << endl;
                     printIndent(out, indentDepth, tab);
                 }

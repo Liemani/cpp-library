@@ -1,27 +1,21 @@
 #ifndef WRAPCHAR_HPP
 #define WRAPCHAR_HPP
 
-#include <string>
+#include <iostream>
 
 namespace LMI {
 
-template <typename CharType>
-class WrapChar {
-private:
-    char ch;
-
+struct WrapChar {
 public:
+    char value;
+
     WrapChar(void) {};
-    WrapChar(char ch) { this->ch = ch; };
+    WrapChar(char value) { this->value = value; };
 
-    operator CharType&(void) { return this->ch; };
+    operator char&(void) { return this->value; };
+};  // struct WrapChar
 
-    bool included(CharType* string) const;
-
-    void debugDescription(std::ostream& out) const;
-};  // class WrapChar
-
-#include "WrapChar.ipp"
+void debugDescription(std::ostream& out, const WrapChar& wrapChar);
 
 }   // namespace LMI
 

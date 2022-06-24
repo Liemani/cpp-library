@@ -1,21 +1,20 @@
 #ifndef WRAPARRAY_HPP
 #define WRAPARRAY_HPP
 
-#include <string>
+#include <iostream>
 
 namespace LMI {
 
 template <typename ElementType>
-class WrapArray {
-private:
-    ElementType* address;
+struct WrapArray {
+    const ElementType* address;
     std::size_t count;
 
-public:
-    WrapArray(ElementType* address, std::size_t count): address(address), count(count) {};
+    WrapArray(const ElementType* address, std::size_t count): address(address), count(count) {};
+};  // struct WrapArray
 
-    void debugDescription(std::ostream& out) const;
-};  // class WrapArray
+template <typename ElementType>
+void debugDescription(std::ostream& out, const WrapArray<ElementType>& wrapArray);
 
 #include "WrapArray.ipp"
 

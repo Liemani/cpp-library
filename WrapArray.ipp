@@ -1,11 +1,13 @@
+#include "BuiltInType.hpp"
+
 template <typename ElementType>
-void WrapArray<ElementType>::debugDescription(std::ostream& out) const {
+void debugDescription(std::ostream& out, const WrapArray<ElementType>& wrapArray) {
     out << '[';
-    ElementType* element = this->address;
-    for (std::size_t i = 0; i < this->count; ++i) {
-        element->debugDescription(out);
-        out << ",";
-        ++element;
+    const ElementType* elementPointer = wrapArray.address;
+    for (std::size_t i = 0; i < wrapArray.count; ++i) {
+        debugDescription(out, *elementPointer);
+        out << ',';
+        ++elementPointer;
     }
     out << ']';
 }

@@ -1,6 +1,8 @@
 NAME			:= libcpp-library.a
 
 SRCS			:= \
+				   BuiltInChar.cpp \
+				   WrapChar.cpp \
 				   JSONDescriber.cpp
 
 OBJS			:= $(SRCS:.cpp=.o)
