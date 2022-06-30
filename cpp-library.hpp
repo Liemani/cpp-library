@@ -3,8 +3,8 @@
 
 //  file public main header
 
-#include "BuiltInType.hpp"
 #include "BuiltInChar.hpp"
+#include "BuiltInType.hpp"
 #include "WrapChar.hpp"
 #include "WrapArray.hpp"
 #include "JSONDescriber.hpp"

@@ -1,3 +1,4 @@
+#include <string>
 #include "BuiltInChar.hpp"
 
 namespace LMI {
@@ -12,16 +13,24 @@ bool included(char ch, const char* string) {
     return false;
 }
 
-void debugDescription(std::ostream& out, char ch) {
-    out << '\"';
-    out << ch;
-    out << '\"';
+std::string debugDescription(char ch) {
+    std::string description;
+
+    description += '\"';
+    description += ch;
+    description += '\"';
+
+    return description;
 }
 
-void debugDescription(std::ostream& out, const char* string) {
-    out << '\"';
-    out << string;
-    out << '\"';
+std::string debugDescription(const char* string) {
+    std::string description;
+
+    description += '\"';
+    description += string;
+    description += '\"';
+
+    return description;
 }
 
 }   // namespace LMI

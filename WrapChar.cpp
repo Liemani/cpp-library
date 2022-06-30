@@ -1,11 +1,11 @@
-#include <iostream>
+#include <string>
 #include "WrapChar.hpp"
 #include "cpp-library.hpp"
 
 namespace LMI {
 
-void debugDescription(std::ostream& out, const WrapChar& wrapChar) {
-    debugDescription(out, wrapChar.value);
+std::string debugDescription(const WrapChar& ch) {
+    return debugDescription(ch.value);
 }
 
 }   // namespace LMI

@@ -1,10 +1,13 @@
 #ifndef BUILTINTYPE_HPP
 #define BUILTINTYPE_HPP
 
+#include <string>
+#include <sstream>
+
 namespace LMI {
 
 template <typename BuiltInType>
-void debugDescription(std::ostream& out, BuiltInType value);
+std::string debugDescription(BuiltInType value);
 
 #include "BuiltInType.ipp"
 

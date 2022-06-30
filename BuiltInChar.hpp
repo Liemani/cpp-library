@@ -1,15 +1,14 @@
 #ifndef BUILTINCHAR_HPP
 #define BUILTINCHAR_HPP
 
-#include <iostream>
+#include <string>
 
 namespace LMI {
 
 bool included(char ch, const char* string);
 
-
-void debugDescription(std::ostream& out, char ch);
-void debugDescription(std::ostream& out, const char* string);
+std::string debugDescription(char ch);
+std::string debugDescription(const char* string);
 
 }   // namespace LMI
 

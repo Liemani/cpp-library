@@ -1,7 +1,7 @@
 #ifndef WRAPARRAY_HPP
 #define WRAPARRAY_HPP
 
-#include <iostream>
+#include <string>
 
 namespace LMI {
 
@@ -14,7 +14,7 @@ struct WrapArray {
 };  // struct WrapArray
 
 template <typename ElementType>
-void debugDescription(std::ostream& out, const WrapArray<ElementType>& wrapArray);
+std::string debugDescription(const WrapArray<ElementType>& array);
 
 #include "WrapArray.ipp"
 

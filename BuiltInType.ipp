@@ -1,4 +1,8 @@
 template <typename BuiltInType>
-void debugDescription(std::ostream& out, BuiltInType value) {
-    out << value;
+std::string debugDescription(BuiltInType value) {
+    std::ostringstream oss;
+
+    oss << value;
+
+    return oss.str();
 }

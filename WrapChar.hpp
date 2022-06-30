@@ -1,7 +1,7 @@
 #ifndef WRAPCHAR_HPP
 #define WRAPCHAR_HPP
 
-#include <iostream>
+#include <string>
 
 namespace LMI {
 
@@ -15,7 +15,7 @@ public:
     operator char&(void) { return this->value; };
 };  // struct WrapChar
 
-void debugDescription(std::ostream& out, const WrapChar& wrapChar);
+    std::string debugDescription(const WrapChar& ch);
 
 }   // namespace LMI
 
