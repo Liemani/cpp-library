@@ -1,3 +1,6 @@
+#ifndef WRAPARRAY_IPP
+#define WRAPARRAY_IPP
+
 #include "BuiltInType.hpp"
 #include "BuiltInChar.hpp"
 
@@ -21,3 +24,5 @@ std::string debugDescription(const WrapArray<ElementType>& array) {
 }
 
 }   // namespace LMI
+
+#endif  // WRAPARRAY_IPP

@@ -1,3 +1,6 @@
+#ifndef BUILTINTYPE_IPP
+#define BUILTINTYPE_IPP
+
 #include <string>
 #include <sstream>
 
@@ -13,3 +16,5 @@ std::string debugDescription(BuiltInType value) {
 }
 
 }   // namespace LMI
+
+#endif  // BUILTINTYPE_IPP
