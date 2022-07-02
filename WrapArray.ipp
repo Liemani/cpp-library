@@ -1,6 +1,10 @@
 #include "BuiltInType.hpp"
 #include "BuiltInChar.hpp"
 
+#include <string>
+
+namespace LMI {
+
 template <typename ElementType>
 std::string debugDescription(const WrapArray<ElementType>& array) {
     std::string description;
@@ -15,3 +19,5 @@ std::string debugDescription(const WrapArray<ElementType>& array) {
 
     return description;
 }
+
+}   // namespace LMI

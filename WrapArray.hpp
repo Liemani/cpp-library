@@ -16,8 +16,8 @@ struct WrapArray {
 template <typename ElementType>
 std::string debugDescription(const WrapArray<ElementType>& array);
 
-#include "WrapArray.ipp"
-
 }   // namespace LMI
+
+#include "WrapArray.ipp"
 
 #endif  // WRAPARRAY_HPP
