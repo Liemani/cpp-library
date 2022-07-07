@@ -8,6 +8,9 @@ namespace LMI {
 template <typename BuiltInType>
 std::string debugDescription(BuiltInType value);
 
+template <typename BuiltInType>
+std::string debugDescription(BuiltInType* value);
+
 }   // namespace LMI
 
 #include "BuiltInType.ipp"

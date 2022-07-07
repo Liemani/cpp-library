@@ -20,11 +20,12 @@ inline static void printIndent(std::ostream& out, int indentDepth, const char* t
 
 void JSONDescriber::describe(std::ostream& out, const string& string, const char* tab) {
     int indentDepth = 0;
+    char currentChar;
     char previousNonSpaceChar = '\0';
 
     const char* currentCharPointer = string.c_str();
     while (true) {
-        const char currentChar = *currentCharPointer;
+        currentChar = *currentCharPointer;
 
         if (currentChar == '\0')
             break;
@@ -62,6 +63,22 @@ void JSONDescriber::describe(std::ostream& out, const string& string, const char
             case '\n':
             case ' ':
                 break;
+            case '\"':
+                if (included(previousNonSpaceChar, newLineFollowChars)) {
+                    out << endl;
+                    printIndent(out, indentDepth, tab);
+                }
+                out << currentChar;
+                ++currentCharPointer;
+                currentChar = *currentCharPointer;
+                out << currentChar;
+                while (currentChar != '\"') {
+                    ++currentCharPointer;
+                    currentChar = *currentCharPointer;
+                    out << currentChar;
+                }
+                previousNonSpaceChar = currentChar;
+                break;
             default:
                 if (included(previousNonSpaceChar, newLineFollowChars)) {
                     out << endl;
@@ -74,6 +91,10 @@ void JSONDescriber::describe(std::ostream& out, const string& string, const char
 
         ++currentCharPointer;
     }
+}
+
+void JSONDescriber::describe(const string& string) {
+    JSONDescriber::describe(std::cout, string, "    ");
 }
 
 inline static void printIndent(std::ostream& out, int indentDepth, const char* tab) {

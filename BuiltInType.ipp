@@ -15,6 +15,18 @@ std::string debugDescription(BuiltInType value) {
     return oss.str();
 }
 
+template <typename BuiltInType>
+std::string debugDescription(BuiltInType* value) {
+    std::ostringstream oss;
+
+    if (value == NULL)
+        return "null";
+    else
+        oss << value;
+
+    return oss.str();
+}
+
 }   // namespace LMI
 
 #endif  // BUILTINTYPE_IPP
