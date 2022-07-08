@@ -91,6 +91,8 @@ void JSONDescriber::describe(std::ostream& out, const string& string, const char
 
         ++currentCharPointer;
     }
+
+    out << endl;
 }
 
 void JSONDescriber::describe(const string& string) {
